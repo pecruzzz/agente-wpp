@@ -73,11 +73,14 @@ sock.ev.on("messages.upsert", ({ messages }: { messages: WAMessage[] }) => {
 
     // @ts-ignore
     const formattedMessage: FormattedMessage | undefined = getMessage(message);
-    logger.info("Usuario: " + getMessage(message)?.content);
+    logger.info(
+      message.key.remoteJid?.split("@")[0] +
+        ": " +
+        getMessage(message)?.content,
+    );
 
     if (formattedMessage !== undefined) {
       MessageHandler(sock, formattedMessage);
-      logger.info(formattedMessage.key.remoteJid);
     }
   }
 });

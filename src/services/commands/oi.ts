@@ -4,7 +4,7 @@ const oi: Command = {
   command: "oi",
   execute: async (bot, message) => {
     await bot.sendMessage(message.key.remoteJid!, {
-      text: "Olá! Aqui quem fala é o bot!",
+      text: "Olá! Eu sou o Eustáquio, bot de testes do Pedro",
     });
   },
 };

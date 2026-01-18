@@ -146,7 +146,7 @@ const ifoodCommands: Command = {
             "ID | Item | Loja | Valor | Pagamento | Criado em\n" +
             rows
               .map((r: any) => {
-                return `${r.id} | ${r.item} | ${r.loja} | R$ ${Number(r.valor)
+                return `${r.id} | ${r.item} | *${r.loja}* | R$ ${Number(r.valor)
                   .toFixed(2)
                   .replace(
                     ".",
@@ -160,6 +160,27 @@ const ifoodCommands: Command = {
           text: "Não foi possível carregar a lista",
         });
         logger.error("Não foi possível carregar a lista: " + error);
+      }
+    }
+
+    if (action === "total") {
+      try {
+        const stmt = db.prepare(`
+      SELECT SUM(valor) AS total
+      FROM ifood
+      WHERE strftime('%Y-%m', created_at) = strftime('%Y-%m', 'now', '-3 hours')
+    `);
+        const result = stmt.get() as { total: number | null };
+        const total = result.total ?? 0;
+
+        bot.sendMessage(message.key.remoteJid!, {
+          text: `Total de compras no ifood nesse mês: R$ ${total.toFixed(2)}`,
+        });
+      } catch (error) {
+        bot.sendMessage(message.key.remoteJid!, {
+          text: "Erro ao realizar soma!",
+        });
+        logger.error("Erro ao realizar soma: " + error);
       }
     }
 
