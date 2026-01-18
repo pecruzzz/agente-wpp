@@ -16,9 +16,13 @@ try {
 db.exec(
   `
   CREATE TABLE IF NOT EXISTS ifood (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    texto TEXT
-  )
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  item TEXT NOT NULL,
+  loja TEXT NOT NULL,
+  valor REAL NOT NULL,
+  pagamento TEXT,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+)
 `,
 );
 
