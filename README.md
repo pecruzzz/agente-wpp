@@ -68,8 +68,5 @@ CMD ["node", "dist/index.js"]
 - Verifique assinatura de webhooks.
 - Implemente logs e tratamento de erros nas chamadas externas.
 
-## Licença
-MIT — atualize conforme desejado.
-
 ## Contato
 pecruzzz — https://github.com/pecruzzz/agente-wpp
