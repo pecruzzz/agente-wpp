@@ -1,0 +1,7 @@
+node_modules/
+.env
+dist/
+data/
+auth.json
+bot.db
+auth
